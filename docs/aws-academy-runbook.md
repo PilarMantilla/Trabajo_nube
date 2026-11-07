@@ -127,7 +127,3 @@ Guarden resultados no sensibles bajo `evidence/aws/`:
 ## 9. Limpieza y costos
 
 Al terminar la demostración, guarden resultados y apaguen/eliminen únicamente los recursos temporales según las reglas del laboratorio. Verifiquen volúmenes y direcciones asignadas para no dejar recursos facturables activos. No ejecuten creación de VMs sin revisar primero cuota, saldo/duración y autorización del equipo.
-
-## Bloqueo actual
-
-Al preparar este runbook, AWS CLI estaba instalado en el entorno de trabajo, pero no se encontró una sesión/credencial válida de AWS Academy. Este archivo prepara el procedimiento; el despliegue debe ejecutarse desde el laboratorio del equipo cuando haya sesión y cuota disponibles.
