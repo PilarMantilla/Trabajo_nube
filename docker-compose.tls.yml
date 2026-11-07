@@ -1,0 +1,41 @@
+services:
+  namenode:
+    environment:
+      TLS_CERTFILE: /certs/dev.crt
+      TLS_KEYFILE: /certs/dev.key
+      TLS_CA_BUNDLE: /certs/dev.crt
+    volumes:
+      - ./certs:/certs:ro
+  datanode1:
+    environment:
+      NAMENODE_URL: https://namenode:8000
+      NAMENODE_INTERNAL_URL: https://namenode:8000
+      NODE_INTERNAL_URL: https://datanode1:8001
+      NODE_EXTERNAL_URL: ${DN1_EXTERNAL_URL:-https://localhost:8101}
+      TLS_CERTFILE: /certs/dev.crt
+      TLS_KEYFILE: /certs/dev.key
+      TLS_CA_BUNDLE: /certs/dev.crt
+    volumes:
+      - ./certs:/certs:ro
+  datanode2:
+    environment:
+      NAMENODE_URL: https://namenode:8000
+      NAMENODE_INTERNAL_URL: https://namenode:8000
+      NODE_INTERNAL_URL: https://datanode2:8001
+      NODE_EXTERNAL_URL: ${DN2_EXTERNAL_URL:-https://localhost:8102}
+      TLS_CERTFILE: /certs/dev.crt
+      TLS_KEYFILE: /certs/dev.key
+      TLS_CA_BUNDLE: /certs/dev.crt
+    volumes:
+      - ./certs:/certs:ro
+  datanode3:
+    environment:
+      NAMENODE_URL: https://namenode:8000
+      NAMENODE_INTERNAL_URL: https://namenode:8000
+      NODE_INTERNAL_URL: https://datanode3:8001
+      NODE_EXTERNAL_URL: ${DN3_EXTERNAL_URL:-https://localhost:8103}
+      TLS_CERTFILE: /certs/dev.crt
+      TLS_KEYFILE: /certs/dev.key
+      TLS_CA_BUNDLE: /certs/dev.crt
+    volumes:
+      - ./certs:/certs:ro

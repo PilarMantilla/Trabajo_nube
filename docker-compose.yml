@@ -1,0 +1,79 @@
+services:
+  namenode:
+    build: ./namenode
+    ports:
+      - "8100:8000"
+    environment:
+      BLOCK_SIZE: ${DFS_BLOCK_SIZE:-8388608}
+      REPLICATION_FACTOR: ${DFS_REPLICATION_FACTOR:-3}
+      WRITE_QUORUM: ${DFS_WRITE_QUORUM:-2}
+      METADATA_PATH: /data/metadata.json
+      HEARTBEAT_TIMEOUT_SEC: ${DFS_HEARTBEAT_TIMEOUT_SEC:-30}
+      DFS_TOKEN_SECRET: ${DFS_TOKEN_SECRET:-local-development-secret-change-me}
+      DFS_INTERNAL_SECRET: ${DFS_INTERNAL_SECRET:-local-internal-secret-change-me}
+      TLS_CA_BUNDLE: ${TLS_CA_BUNDLE:-}
+      SEED_METADATA_PATH: /seed.json
+    volumes:
+      - ./data/runtime/namenode:/data
+      - ./examples/metadata.seed.json:/seed.json:ro
+    restart: unless-stopped
+
+  datanode1:
+    build: ./datanode
+    ports:
+      - "8101:8001"
+    environment:
+      - NODE_ID=dn1
+      - NAMENODE_URL=${NAMENODE_URL:-http://namenode:8000}
+      - NAMENODE_INTERNAL_URL=${NAMENODE_URL:-http://namenode:8000}
+      - NODE_INTERNAL_URL=http://datanode1:8001
+      - NODE_EXTERNAL_URL=${DN1_EXTERNAL_URL:-http://localhost:8101}
+      - BLOCK_SIZE=${DFS_BLOCK_SIZE:-8388608}
+      - DFS_TOKEN_SECRET=${DFS_TOKEN_SECRET:-local-development-secret-change-me}
+      - DFS_INTERNAL_SECRET=${DFS_INTERNAL_SECRET:-local-internal-secret-change-me}
+      - TLS_CA_BUNDLE=${TLS_CA_BUNDLE:-}
+    volumes:
+      - ./data/runtime/dn1:/blocks
+    depends_on:
+      - namenode
+    restart: unless-stopped
+
+  datanode2:
+    build: ./datanode
+    ports:
+      - "8102:8001"
+    environment:
+      - NODE_ID=dn2
+      - NAMENODE_URL=${NAMENODE_URL:-http://namenode:8000}
+      - NAMENODE_INTERNAL_URL=${NAMENODE_URL:-http://namenode:8000}
+      - NODE_INTERNAL_URL=http://datanode2:8001
+      - NODE_EXTERNAL_URL=${DN2_EXTERNAL_URL:-http://localhost:8102}
+      - BLOCK_SIZE=${DFS_BLOCK_SIZE:-8388608}
+      - DFS_TOKEN_SECRET=${DFS_TOKEN_SECRET:-local-development-secret-change-me}
+      - DFS_INTERNAL_SECRET=${DFS_INTERNAL_SECRET:-local-internal-secret-change-me}
+      - TLS_CA_BUNDLE=${TLS_CA_BUNDLE:-}
+    volumes:
+      - ./data/runtime/dn2:/blocks
+    depends_on:
+      - namenode
+    restart: unless-stopped
+
+  datanode3:
+    build: ./datanode
+    ports:
+      - "8103:8001"
+    environment:
+      - NODE_ID=dn3
+      - NAMENODE_URL=${NAMENODE_URL:-http://namenode:8000}
+      - NAMENODE_INTERNAL_URL=${NAMENODE_URL:-http://namenode:8000}
+      - NODE_INTERNAL_URL=http://datanode3:8001
+      - NODE_EXTERNAL_URL=${DN3_EXTERNAL_URL:-http://localhost:8103}
+      - BLOCK_SIZE=${DFS_BLOCK_SIZE:-8388608}
+      - DFS_TOKEN_SECRET=${DFS_TOKEN_SECRET:-local-development-secret-change-me}
+      - DFS_INTERNAL_SECRET=${DFS_INTERNAL_SECRET:-local-internal-secret-change-me}
+      - TLS_CA_BUNDLE=${TLS_CA_BUNDLE:-}
+    volumes:
+      - ./data/runtime/dn3:/blocks
+    depends_on:
+      - namenode
+    restart: unless-stopped

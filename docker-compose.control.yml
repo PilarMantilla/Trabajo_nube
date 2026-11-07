@@ -1,0 +1,22 @@
+services:
+  namenode:
+    build: ./namenode
+    ports:
+      - "8000:8000"
+    environment:
+      BLOCK_SIZE: ${DFS_BLOCK_SIZE:-8388608}
+      REPLICATION_FACTOR: ${DFS_REPLICATION_FACTOR:-3}
+      WRITE_QUORUM: ${DFS_WRITE_QUORUM:-2}
+      METADATA_PATH: /data/metadata.json
+      HEARTBEAT_TIMEOUT_SEC: ${DFS_HEARTBEAT_TIMEOUT_SEC:-30}
+      DFS_TOKEN_SECRET: ${DFS_TOKEN_SECRET:?Set a long random DFS_TOKEN_SECRET}
+      DFS_INTERNAL_SECRET: ${DFS_INTERNAL_SECRET:?Set a long random DFS_INTERNAL_SECRET}
+      TLS_CERTFILE: /certs/server.crt
+      TLS_KEYFILE: /certs/server.key
+      TLS_CA_BUNDLE: /certs/ca.crt
+      SEED_METADATA_PATH: /seed.json
+    volumes:
+      - ./data/runtime/namenode:/data
+      - ./examples/metadata.seed.json:/seed.json:ro
+      - ./certs:/certs:ro
+    restart: unless-stopped

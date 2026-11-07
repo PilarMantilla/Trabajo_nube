@@ -1,0 +1,11 @@
+{
+  "users": {
+    "juan": "pbkdf2_sha256$310000$f7f7b742ccd112099799941c054c7721$c93d4efd3ad04198eadb9c6e3834d6caa966029a91ae1a4f8ca878c2dcf8378d",
+    "nico": "pbkdf2_sha256$310000$8ff265306554f7d8533b836e5268f3bb$39be12e2cf7a81974b377f1036ace6b2c406f48729a5b4e26bd09de7e05272e4"
+  },
+  "files": {},
+  "uploads": {},
+  "datanodes": {},
+  "dirs": [],
+  "locks": {}
+}
