@@ -91,7 +91,3 @@
 - [ ] TLS/canales internos demostrados y estado real del cifrado en disco.
 - [ ] Rendimiento para un cliente y múltiples clientes, con tamaño, topología, repeticiones, latencias y throughput.
 - [ ] Informe final, video de 10–15 minutos y defensa practicada por las tres integrantes.
-
-## Criterio para declarar el trabajo listo
-
-No marcar el proyecto como completo hasta que cada fila evaluable tenga: (1) implementación o limitación aceptada, (2) prueba reproducible, (3) evidencia guardada, y (4) explicación que cualquiera de las tres integrantes pueda defender. Esta matriz es una guía de cierre; la calificación final depende de la evaluación del profesor.
