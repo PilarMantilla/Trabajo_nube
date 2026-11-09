@@ -2,6 +2,9 @@
 
 Prototipo de sistema de archivos distribuido para el Proyecto 1 de Sistemas Distribuidos. La arquitectura usa una CLI, un plano de control REST con metadatos persistentes y tres DataNodes independientes. Los bloques se transfieren directamente del cliente a los DataNodes y el plano de control solo publica un manifiesto cuando recibe recibos válidos de al menos dos réplicas.
 
+Link al video explicativo: 
+
+https://youtu.be/Jn0-rcJDCng
 ## Estado y garantías implementadas
 
 - Bloques de 8 MiB por defecto, distribución entre DataNodes y factor objetivo de tres copias. `WRITE_QUORUM=2` permite confirmar con dos copias persistidas; la tercera puede completarse mediante reparación cuando exista un nodo disponible.
